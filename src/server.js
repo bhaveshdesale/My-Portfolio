@@ -62,27 +62,21 @@
 
 
 
-
-// module.exports = app;
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
 
-// ✅ Serve frontend static files
-app.use(express.static(path.join(__dirname, 'client/build')));
-
 const contactEmail = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: "bhaveshdesale16@gmail.com", // your Gmail ID
+    pass: "jxiy smbf nwhk vmuu"        // your Gmail App Password (not your Gmail password)
   },
 });
 
@@ -99,8 +93,8 @@ app.post("/contact", (req, res) => {
   const fullName = `${firstName} ${lastName}`;
 
   const mailOptions = {
-    from: fullName,
-    to: "bhaveshdesale16@gmail.com",
+    from: `"${fullName}" <bhaveshdesale16@gmail.com>`,
+    to: "your-recipient-email@example.com",  // Define the recipient email
     subject: "Portfolio Contact Form Submission",
     html: `
       <h3>New Contact Message</h3>
@@ -122,11 +116,9 @@ app.post("/contact", (req, res) => {
   });
 });
 
-// ✅ Redirect other routes to frontend
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'));
-});
-
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
+app.get("/", (req, res) => {
+  res.send("Welcome to the contact form API");
 });
