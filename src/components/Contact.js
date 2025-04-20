@@ -125,7 +125,7 @@ export const Contact = () => {
     setButtonText("Sending...");
 
     try {
-      const response = await fetch("https://render-backend-5-lskc.onrender.com/contact", {
+      const response = await fetch("http://localhost:5000/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
