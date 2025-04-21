@@ -17,6 +17,7 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
+      <VisitCounter /> {/* ✅ Display on every page */}
     </div>
   );
 }
